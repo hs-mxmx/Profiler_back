@@ -5,13 +5,15 @@ from sqlalchemy import Column, Integer, String
 class User(db.Base):
     __tablename__ = 'user'
     uid = Column(String(50), primary_key=True)
+    accessToken = Column(String(50), nullable=False)
     name = Column(String(30), nullable=False)
     username = Column(String(30), nullable=False)
     email = Column(String(50))
     password = Column(String(50))
 
-    def __init__(self, uid, name, username, email, password):
+    def __init__(self, uid, accessToken, name, username, email, password):
         self.uid = uid
+        self.accessToken = accessToken
         self.name = name
         self.username = username
         self.email = email
@@ -19,6 +21,7 @@ class User(db.Base):
 
     def __repr__(self):
         return {"uid": self.uid,
+                "accessToken": self.accessToken,
                 "name": self.name,
                 "username": self.username,
                 "email": self.email,

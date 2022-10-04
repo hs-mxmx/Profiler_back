@@ -1,7 +1,7 @@
 export default class APIService {
     // Insert an user
     static Register(body) {
-        return fetch(`http://localhost:5000/session/register`, {
+        return fetch(`http://localhost:5000/auth/register`, {
             'method': 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -20,7 +20,7 @@ export default class APIService {
 
     // Login
     static Login(body) {
-        return fetch(`http://localhost:5000/login`, {
+        return fetch(`http://localhost:5000/auth/signin`, {
             'method': 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -1,21 +1,14 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, Component} from "react";
 import logo from '../logo.svg';
-import {useLocation} from "react-router-dom";
+import {useNavigate, useLocation} from "react-router-dom";
+import AuthService from "../services/auth.service";
 import {useCookies} from 'react-cookie';
 
 export default function Dashboard(props) {
 
     const {state} = useLocation();
-    const [currentUserName, setCurrentUserName] = useState(() => state['Username'])
-    const [currentUserUID, setCurrentUserUID] = useState(() => state['UID'])
-    const [sessionId, setSessionId] = useState('')
-    const [cookies, setCookie] = useCookies(['session']);
-
-    const handle = () => {
-        setCookie('session', sessionId, {path: '/'});
-    };
-
-    console.log(cookies)
+    const navigate = useNavigate();
+    const [authenticated, setauthenticated] = useState(AuthService.getCurrentUser());
 
     return (
         <div className="App">
@@ -32,10 +25,10 @@ export default function Dashboard(props) {
                 >
                     Learn React
                 </a>
-                <p>{currentUserName}</p>
-                <p>{currentUserUID}</p>
-                <p>{cookies.sessionId}</p>
+                <p>Username: {authenticated.username}</p>
+                <p>Token: {authenticated.accessToken}</p>
             </header>
         </div>
     )
 }
+

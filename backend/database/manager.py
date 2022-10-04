@@ -7,8 +7,8 @@ class DBManager:
     def __create__(self):
         db.Base.metadata.create_all(db.engine)
 
-    def __insert_user__(self, uuid, name, username, mail, password):
-        user = User(uuid, name, username, mail, password)
+    def __insert_user__(self, uuid, accessToken, name, username, mail, password):
+        user = User(uuid, accessToken, name, username, mail, password)
         db.session.add(user)
         db.session.commit()
 
