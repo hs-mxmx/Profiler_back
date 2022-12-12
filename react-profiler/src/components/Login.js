@@ -1,9 +1,7 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useState} from "react";
 import {isEmail} from "validator";
-
 import AuthService from "../services/auth.service";
 import {useNavigate} from "react-router-dom";
-import APIService from "./APIService";
 
 const required = value => {
     if (!value) {
@@ -46,7 +44,7 @@ const validPassword = (value) => {
     }
 };
 
-export default () => {
+const Login = () => {
     const navigate = useNavigate();
 
     const [authMode, setAuthMode] = useState("signin")
@@ -54,7 +52,7 @@ export default () => {
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [loading, setLoading] = useState(false);
+    const [loading] = useState(false);
     const [successful, setSuccessful] = useState(false);
     const [message, setMessage] = useState('');
 
@@ -281,3 +279,5 @@ export default () => {
         </div>
     )
 }
+
+export default Login;

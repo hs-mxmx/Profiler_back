@@ -1,14 +1,10 @@
-import React, {useEffect, useState, Component} from "react";
+import React, {useState} from "react";
 import logo from '../logo.svg';
-import {useNavigate, useLocation} from "react-router-dom";
 import AuthService from "../services/auth.service";
-import {useCookies} from 'react-cookie';
 
-export default function Dashboard(props) {
+export default function Dashboard() {
 
-    const {state} = useLocation();
-    const navigate = useNavigate();
-    const [authenticated, setauthenticated] = useState(AuthService.getCurrentUser());
+    const [authenticated] = useState(AuthService.getCurrentUser());
 
     return (
         <div className="App">

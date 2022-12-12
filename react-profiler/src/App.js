@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Navigate, BrowserRouter, Routes, Route, Link} from "react-router-dom"
+import {BrowserRouter, Routes, Route} from "react-router-dom"
 import './App.css';
 import './components/Login.css';
 import Login from "./components/Login";
@@ -10,15 +10,15 @@ import AuthService from "./services/auth.service";
 
 
 const App = () => {
-    const [currentUser, setCurrentUser] = useState(undefined);
+    const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser());
+
+    const logOut = () => {
+        AuthService.logout();
+        setCurrentUser(undefined);
+    };
+
     useEffect(() => {
-        const user = AuthService.getCurrentUser();
-
-        if (user) {
-            setCurrentUser(user);
-            console.log(user);
-        }
-
+        console.log(currentUser);
         EventBus.on("logout", () => {
             logOut();
         });
@@ -28,14 +28,9 @@ const App = () => {
         };
     }, []);
 
-    const logOut = () => {
-        AuthService.logout();
-        setCurrentUser(undefined);
-    };
   return (
       <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
           {currentUser ? (
               <Route path="/dashboard*" element={<Dashboard />} />
           ) : (
